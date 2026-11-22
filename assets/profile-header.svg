@@ -1,1 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-label="xantic21 — personal products, one design language"><defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F9FBFF"/><stop offset=".52" stop-color="#E9EFFD"/><stop offset="1" stop-color="#D8E4FA"/></linearGradient></defs><rect width="1280" height="420" fill="url(#b)"/><circle cx="1225" cy="-30" r="325" fill="#9DBEEB" opacity=".34"/><circle cx="1202" cy="443" r="275" fill="#A99BE7" opacity=".21"/><path d="M867 -30 C 735 200 936 310 920 450 L1290 450 L1290 -30Z" fill="#fff" opacity=".28"/><rect x="76" y="115" width="185" height="185" rx="58" fill="#fff" opacity=".84"/><g transform="translate(110 149) scale(.23)"><path d="M166 152 L347 358 M346 152 L166 358" fill="none" stroke="#3B5C9A" stroke-width="62" stroke-linecap="round"/><circle cx="256" cy="256" r="25" fill="#fff"/></g><text x="315" y="202" font-family="Inter,Roboto,Arial,sans-serif" font-size="84" font-weight="780" fill="#273C67">xantic21</text><text x="319" y="259" font-family="Inter,Roboto,Arial,sans-serif" font-size="28" fill="#566B91">Personal products. One design language.</text><text x="322" y="319" font-family="Inter,Roboto,Arial,sans-serif" font-size="19" fill="#6681A5">Design-minded · Private by default · Built with purpose</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-label="xantic21 — personal products, one design language">
+<defs>
+ <linearGradient id="base" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F8FBFF"/><stop offset=".55" stop-color="#E7F0FF"/><stop offset="1" stop-color="#D3E5FA"/></linearGradient>
+ <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#B1DDF9"/><stop offset=".54" stop-color="#7CA6E8"/><stop offset="1" stop-color="#4264BB"/></linearGradient>
+ <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#D7D2F7"/><stop offset=".58" stop-color="#A7B9F2"/><stop offset="1" stop-color="#DCE8FD"/></linearGradient>
+ <linearGradient id="badge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#E2EBFF"/><stop offset="1" stop-color="#C4D9FF"/></linearGradient>
+ <linearGradient id="ink" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#344C83"/><stop offset="1" stop-color="#556EAE"/></linearGradient>
+</defs>
+<rect width="1280" height="420" fill="url(#base)"/>
+<path d="M0 0H243C210 93 155 164 0 189Z" fill="#B4D4FC" opacity=".55"/>
+<path d="M0 318C190 250 227 245 335 324L405 420H0Z" fill="url(#violet)" opacity=".70"/>
+<path d="M808 -60C697 63 749 181 914 207C1055 229 1107 107 1280 -22V420H981C816 322 811 240 808 -60Z" fill="url(#blue)" opacity=".58"/>
+<path d="M1034 -49C915 54 908 146 1031 180C1148 215 1195 89 1280 54V420H1095C1037 309 1012 174 1034 -49Z" fill="url(#violet)" opacity=".77"/>
+<path d="M744 420C827 326 978 340 1067 247C1157 155 1199 152 1280 129V420Z" fill="#5F85D0" opacity=".43"/>
+<path d="M742 420C830 332 965 341 1059 247C1163 144 1211 157 1280 129" fill="none" stroke="#FFF" stroke-opacity=".65" stroke-width="2"/>
+<path d="M807 0C749 88 729 144 794 182C852 219 915 210 956 175" fill="none" stroke="#FFF" stroke-opacity=".72" stroke-width="2"/>
+<rect x="65" y="119" width="173" height="173" rx="49" fill="#FFFFFF" opacity=".62"/>
+<rect x="77" y="130" width="149" height="149" rx="40" fill="url(#badge)"/>
+<g transform="translate(99 153) scale(.55)">
+<path d="M54 46L154 149M154 46L54 149" fill="none" stroke="url(#ink)" stroke-width="27" stroke-linecap="round"/>
+<circle cx="104" cy="97" r="9.5" fill="#fff"/>
+</g>
+<text x="279" y="202" font-family="Inter,Roboto,Arial,sans-serif" font-size="79" font-weight="750" fill="#293E70">xantic21</text>
+<text x="283" y="260" font-family="Inter,Roboto,Arial,sans-serif" font-size="27" fill="#425D8A">Personal products. One design language.</text>
+<text x="285" y="315" font-family="Inter,Roboto,Arial,sans-serif" font-size="19" fill="#536B91">Designed with purpose · Private by default</text>
+</svg>
