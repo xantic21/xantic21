@@ -1,0 +1,89 @@
+# GitHub-native operations. Only scheduled monitoring can write deduplicated blocker issues.
+# Never signs, deploys, tags, publishes, merges or edits code.
+name: Portfolio · CI Health and Release Readiness
+on:
+  schedule:
+    - cron: '17 6 * * *' # Daily: sustained CI failures and missing scheduled jobs
+    - cron: '21 7 * * 0' # Sunday: read-only release preparation report
+  workflow_dispatch: # Read-only; creates no issues and never publishes
+  pull_request:
+    paths:
+      - 'tools/portfolio/**'
+      - '.github/workflows/portfolio-ops.yml'
+permissions:
+  contents: read
+  actions: read
+  issues: read
+concurrency:
+  group: portfolio-ops-${{ github.repository }}
+  cancel-in-progress: false
+jobs:
+  policy-tests:
+    if: github.repository == 'xantic21/xantic21'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # pinned v4.2.2
+        with:
+          persist-credentials: false
+      - name: Verify control-plane tests and Python syntax (network-free)
+        run: |
+          set -euo pipefail
+          python3 -m py_compile tools/portfolio/ops.py
+          python3 -m unittest discover -s tools/portfolio -p 'test_*.py' -v
+
+  daily-health:
+    needs: policy-tests
+    if: github.repository == 'xantic21/xantic21' && github.event_name == 'schedule' && github.event.schedule == '17 6 * * *'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      actions: read
+      issues: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Detect repeated main CI failures or stale scheduled tasks; deduplicate blocker issue
+        run: python3 tools/portfolio/ops.py --mode health
+
+  manual-health:
+    needs: policy-tests
+    if: github.repository == 'xantic21/xantic21' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      actions: read
+      issues: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Manual read-only health summary (never creates issues)
+        run: python3 tools/portfolio/ops.py --mode health-audit
+
+  release-readiness:
+    needs: policy-tests
+    if: github.repository == 'xantic21/xantic21' && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '21 7 * * 0'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      actions: read
+      issues: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Generate safe release checklist and signed-release blocker evidence (no deploy)
+        run: python3 tools/portfolio/ops.py --mode release
