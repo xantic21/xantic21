@@ -1,0 +1,71 @@
+# Independent repository-local cleanup. HACC audit workflows remain read-only.
+# Full 14-day minimum, conservative allowlist, SHA lease, max 5 deletions/run.
+name: Portfolio · Safe merged-branch cleanup (14 days)
+on:
+  schedule:
+    - cron: '43 4 * * 0' # Sunday 04:43 UTC, independent GitHub maintenance job
+  workflow_dispatch: # owner-triggered AUDIT ONLY; never deletes branches
+  pull_request:
+    paths:
+      - '.github/workflows/safe-branch-cleanup.yml'
+      - 'tools/maintenance/branch_cleanup.py'
+      - 'tools/maintenance/test_branch_cleanup.py'
+permissions:
+  contents: read
+  pull-requests: read
+concurrency:
+  group: portfolio-safe-branch-cleanup-${{ github.repository }}
+  cancel-in-progress: false
+jobs:
+  policy-tests:
+    if: github.repository == 'xantic21/xantic21'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Independent retention and negative-control tests
+        run: python3 -m unittest discover -s tools/maintenance -p 'test_branch_cleanup.py' -v
+
+  audit-only:
+    needs: policy-tests
+    if: github.repository == 'xantic21/xantic21' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: List only; never delete on manual dispatch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/maintenance/branch_cleanup.py --repository "$GITHUB_REPOSITORY" --mode audit | tee "$RUNNER_TEMP/branch-audit.log"
+          cat "$RUNNER_TEMP/branch-audit.log" >> "$GITHUB_STEP_SUMMARY"
+
+  cleanup:
+    needs: policy-tests
+    if: github.repository == 'xantic21/xantic21' && github.event_name == 'schedule' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.2.2
+        with:
+          persist-credentials: true # required for atomic --force-with-lease deletion
+      - name: Cleanup only SHA-identical, merged, 14-day-old low-risk branches
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/maintenance/branch_cleanup.py --repository "$GITHUB_REPOSITORY" --mode apply | tee "$RUNNER_TEMP/branch-cleanup.log"
+          cat "$RUNNER_TEMP/branch-cleanup.log" >> "$GITHUB_STEP_SUMMARY"
