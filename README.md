@@ -14,6 +14,7 @@
 | <img src="assets/henning-hub.svg" width="52" alt="Henning Hub symbol"> **Henning Hub** | A calm home for personal workspaces, favorite apps, useful shortcuts and daily routines. <sub>Private Android app</sub> |
 | <img src="assets/hacc.svg" width="52" alt="HACC companion mark"> **HACC** | Keep an eye on releases and portfolio health through a protected, read-only dashboard. <sub>Private control center</sub> |
 | <img src="assets/stride.svg" width="52" alt="Stride portfolio symbol"> **Stride** | A native Garmin Forerunner 970 watchface that puts training context at a glance. <sub>Private watchface</sub> |
+| <img src="assets/training-lab.svg" width="52" alt="Training Lab portfolio illustration"> **Training Lab 2027** | Explore personal running plans, observations and training guidance with clear source provenance. <sub>Private training cockpit</sub> |
 
 ## Open-source involvement
 
