@@ -18,7 +18,7 @@
 
 ## Open-source involvement
 
-<img src="assets/hevy2garmin.svg" width="52" alt="Original upstream hevy2garmin project icon" align="left">
+<img src="assets/hevy2garmin.svg" width="52" alt="hevy2garmin mint portfolio icon — strength and synchronization" align="left">
 
 **[hevy2garmin](https://github.com/xantic21/hevy2garmin)** — my public fork of the [original project by drkostas](https://github.com/drkostas/hevy2garmin), connecting Hevy strength training with Garmin Connect. Original upstream authorship and license remain authoritative.
 
