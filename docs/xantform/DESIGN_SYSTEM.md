@@ -27,12 +27,12 @@ Palette order: light, medium, ink, dark. Repository names, package and app IDs a
 
 | Variant | Tile | Primary glyph | Secondary glyph |
 | --- | --- | --- | --- |
-| Tonal light (canonical, used on GitHub) | light | ink if it reaches 7 : 1 on the tile, otherwise dark | medium |
+| Tonal light (canonical, used on GitHub) | light | ink if it reaches 7 : 1 on the tile, otherwise dark | medium (Orbit: `#637F9D`) |
 | Tonal dark | dark | light | medium |
 | Adaptive You (themed-icon preview) | common system tile | common system primary | common system secondary |
 | Monochrome layer (Android 13+) | transparent | white | white at 50 % alpha |
 
-Every variant uses the same glyph geometry on a 108 × 108 grid with an organic superellipse squircle. Primary glyphs reach at least 7 : 1 contrast against their tile. Icons are checked at 16, 24, 48 and 108 px on light and dark backgrounds.
+Every variant uses the same glyph geometry on a 108 × 108 grid with an organic superellipse squircle. Primary glyphs reach at least 7 : 1 contrast against their tile. Orbit's tonal-light orbit ring uses `#637F9D` instead of its medium tone so that it reaches at least 3 : 1 on its tile (3.29 : 1); its tonal-dark ring keeps the medium tone (5.13 : 1). Icons are checked at 16, 24, 48 and 108 px on light and dark backgrounds.
 
 ## README and documentation rules
 
